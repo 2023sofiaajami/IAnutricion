@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f8f3">
+    <meta name="description" content="IA nutricion: tu asistente para crear menús saludables semanales.">
+    <title>IA nutricion</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="contenedor-app">
+
+        <!-- ZONA DE CHAT -->
+        <section
+            class="zona-chat"
+            data-zona="zona de chat"
+            aria-label="zona de chat"
+        >
+
+            <header class="encabezado">
+                <div class="identidad">
+                    <div class="logo">IA</div>
+                    <div class="identidad-texto">
+                        <h1>IA nutricion</h1>
+                        <p>Tu asistente de alimentación saludable</p>
+                    </div>
+                </div>
+
+                <div class="estado" id="estado-app" data-estado="listo">
+                    <span class="estado-punto"></span>
+                    <span id="texto-estado">En línea</span>
+                </div>
+            </header>
+
+            <div
+                class="lista-mensajes"
+                id="lista-mensajes"
+                role="log"
+                aria-live="polite"
+                aria-relevant="additions"
+            >
+                <article class="mensaje mensaje-agente">
+                    <span class="mensaje-autor">IA nutricion</span>
+                    <p class="mensaje-texto">
+                        ¡Hola! Bienvenido/a. Soy IA nutricion, tu asistente
+                        de alimentación saludable.
+
+                        Puedo ayudarte a crear menús saludables para toda
+                        la semana, con comidas variadas y equilibradas.
+
+                        ¿Qué te gustaría preparar?
+                    </p>
+                </article>
+            </div>
+
+        </section>
+
+        <!-- ZONA DE ESCRITURA -->
+        <section
+            class="zona-escritura"
+            data-zona="zona de escritura"
+            aria-label="zona de escritura"
+        >
+
+            <form id="formulario-chat" class="formulario-chat">
+
+                <label class="visualmente-oculto" for="entrada-mensaje">
+                    Escribí tu mensaje
+                </label>
+
+                <textarea
+                    id="entrada-mensaje"
+                    name="mensaje"
+                    placeholder="Escribí tu mensaje..."
+                    maxlength="500"
+                    rows="2"
+                    required
+                ></textarea>
+
+                <button
+                    type="submit"
+                    id="boton-enviar"
+                    class="boton-enviar"
+                >
+                    <span>Enviar</span>
+                    <span class="icono-enviar" aria-hidden="true">↑</span>
+                </button>
+
+            </form>
+
+            <p class="texto-ayuda">
+                Máximo 500 caracteres · Enter para enviar · Shift + Enter para nueva línea
+            </p>
+
+        </section>
+
+    </main>
+
+    <!-- Primero se carga la configuración y después la lógica -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
