@@ -1,0 +1,479 @@
+
+/* ========================================
+   CONFIGURACIÓN GENERAL
+======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --verde-principal: #527b48;
+    --verde-oscuro: #365b32;
+    --verde-claro: #edf4e9;
+    --verde-fondo: #f5f8f3;
+    --blanco: #ffffff;
+    --texto: #263326;
+    --texto-secundario: #7b8778;
+    --borde: #e5ebe1;
+    --sombra: 0 12px 45px rgba(42, 65, 37, 0.08);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Arial, sans-serif;
+
+    background: var(--verde-fondo);
+    color: var(--texto);
+
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+/* ========================================
+   CONTENEDOR PRINCIPAL
+======================================== */
+
+.contenedor-app {
+    width: 100%;
+    max-width: 850px;
+    height: min(850px, calc(100vh - 40px));
+
+    min-height: 450px;
+
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: 24px;
+
+    box-shadow: var(--sombra);
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* ========================================
+   ZONA DE CHAT
+======================================== */
+
+.zona-chat {
+    flex: 1;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+/* Encabezado */
+
+.encabezado {
+    min-height: 90px;
+    padding: 20px 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    border-bottom: 1px solid var(--borde);
+}
+
+.identidad {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.logo {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 15px;
+
+    background: var(--verde-principal);
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.identidad-texto h1 {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.identidad-texto p {
+    font-size: 12px;
+    color: var(--texto-secundario);
+    margin-top: 4px;
+}
+
+/* Estado de conexión */
+
+.estado {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    font-size: 12px;
+    color: var(--texto-secundario);
+
+    white-space: nowrap;
+}
+
+.estado-punto {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+    background: #65a65b;
+}
+
+.estado[data-estado="cargando"] .estado-punto {
+    background: #d9a441;
+    animation: pulsar 1s infinite;
+}
+
+.estado[data-estado="error"] .estado-punto {
+    background: #d45d55;
+}
+
+.estado[data-estado="exito"] .estado-punto {
+    background: #65a65b;
+}
+
+@keyframes pulsar {
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* Mensajes */
+
+.lista-mensajes {
+    flex: 1;
+    min-height: 0;
+
+    padding: 28px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.mensaje {
+    max-width: 78%;
+    width: fit-content;
+
+    padding: 15px 18px;
+
+    border-radius: 16px;
+
+    animation: aparecer 0.2s ease;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mensajes del agente */
+
+.mensaje-agente {
+    align-self: flex-start;
+
+    background: var(--verde-claro);
+    border-bottom-left-radius: 4px;
+}
+
+/* Mensajes del usuario */
+
+.mensaje-usuario {
+    align-self: flex-end;
+
+    background: var(--verde-principal);
+    color: white;
+
+    border-bottom-right-radius: 4px;
+}
+
+/* Avisos del sistema */
+
+.mensaje-sistema {
+    align-self: center;
+    max-width: 90%;
+
+    background: #fff5e6;
+    border: 1px solid #f1dfbd;
+
+    color: #805d2c;
+    text-align: center;
+    font-size: 13px;
+}
+
+/* Textos de mensajes */
+
+.mensaje-autor {
+    display: block;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    margin-bottom: 7px;
+    color: var(--verde-oscuro);
+}
+
+.mensaje-usuario .mensaje-autor {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.mensaje-texto {
+    font-size: 14px;
+    line-height: 1.7;
+
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* ========================================
+   ZONA DE ESCRITURA
+======================================== */
+
+.zona-escritura {
+    padding: 20px 25px 15px;
+
+    background: #fbfcfa;
+    border-top: 1px solid var(--borde);
+}
+
+.formulario-chat {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+
+    padding: 10px;
+
+    background: var(--blanco);
+    border: 1px solid #dfe7db;
+    border-radius: 17px;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.formulario-chat:focus-within {
+    border-color: var(--verde-principal);
+    box-shadow: 0 0 0 3px rgba(82, 123, 72, 0.09);
+}
+
+.formulario-chat textarea {
+    flex: 1;
+
+    width: 100%;
+    min-width: 0;
+    min-height: 45px;
+    max-height: 110px;
+
+    padding: 12px 10px;
+
+    border: none;
+    outline: none;
+    resize: none;
+
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+
+    color: var(--texto);
+    background: transparent;
+}
+
+.formulario-chat textarea::placeholder {
+    color: #a0aa9c;
+}
+
+/* Botón de envío */
+
+.boton-enviar {
+    min-width: 105px;
+    height: 43px;
+
+    padding: 0 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: var(--verde-principal);
+    color: white;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: background 0.2s, transform 0.2s;
+}
+
+.boton-enviar:hover:not(:disabled) {
+    background: var(--verde-oscuro);
+    transform: translateY(-1px);
+}
+
+.boton-enviar:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.icono-enviar {
+    width: 22px;
+    height: 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 7px;
+
+    font-size: 17px;
+}
+
+/* Texto de ayuda */
+
+.texto-ayuda {
+    padding: 10px 4px 0;
+
+    font-size: 11px;
+    color: var(--texto-secundario);
+}
+
+/* Accesibilidad */
+
+.visualmente-oculto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ========================================
+   RESPONSIVE: TABLETS Y CELULARES
+======================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 0;
+    }
+
+    .contenedor-app {
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+
+        min-height: 0;
+
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .encabezado {
+        min-height: 78px;
+        padding: 15px 18px;
+    }
+
+    .identidad-texto h1 {
+        font-size: 17px;
+    }
+
+    .identidad-texto p {
+        font-size: 11px;
+    }
+
+    .logo {
+        width: 42px;
+        height: 42px;
+    }
+
+    .lista-mensajes {
+        padding: 20px 15px;
+        gap: 16px;
+    }
+
+    .mensaje {
+        max-width: 90%;
+        padding: 13px 15px;
+    }
+
+    .mensaje-texto {
+        font-size: 13px;
+    }
+
+    .zona-escritura {
+        padding: 13px 12px 12px;
+    }
+
+    .formulario-chat {
+        gap: 7px;
+        padding: 8px;
+    }
+
+    .boton-enviar {
+        min-width: 88px;
+        font-size: 12px;
+    }
+
+    .texto-ayuda {
+        font-size: 10px;
+        line-height: 1.5;
+    }
+}
+
+@media (max-width: 360px) {
+
+    .estado {
+        font-size: 10px;
+    }
+
+    .identidad {
+        gap: 9px;
+    }
+
+    .identidad-texto h1 {
+        font-size: 15px;
+    }
+}
